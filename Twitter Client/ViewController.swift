@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
@@ -20,6 +21,13 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    @IBAction func login(sender: AnyObject) {
+        TwitterClient.sharedInstance.fetchRequestTokenWithPath("oauth/request_token", method: "GET", callbackURL: NSURL(string: ""), scope: nil, success: { (requestToken: BDBOAuth1Credential!) -> Void in
+            print("Nice man")
+            }) { (NSError!) -> Void in
+            print("you suck")
+        }
+    }
 
 }
 
