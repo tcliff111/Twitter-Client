@@ -53,8 +53,8 @@
 		461628EA1C7837490028ACA1 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				461628EC1C7838390028ACA1 /* User.swift */,
 				461628EE1C784FB10028ACA1 /* Tweet.swift */,
+				461628EC1C7838390028ACA1 /* User.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";

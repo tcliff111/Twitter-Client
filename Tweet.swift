@@ -10,15 +10,30 @@ import UIKit
 
 class Tweet: NSObject {
     
-    var text: String?
+    var tweetText: String?
+    var ownerName: String?
+    var ownerUsername: String?
+    var ownerAvatarURL: NSURL?
     var timestamp: NSDate?
     var retweetCount: Int = 0
     var favoriteCount: Int = 0
+    var id: Int = 0
     
     init(dictionary: NSDictionary) {
-        text = dictionary["text"] as? String
+        tweetText = dictionary["text"] as? String
+        id = (dictionary["id"] as? Int) ?? 0
+        
+        let user = dictionary["user"] as? NSDictionary
+        if let user = user {
+            ownerName = user["name"] as? String
+            ownerUsername = "@\(user["screen_name"] as! String)"
+            let ownerAvatarURLString = user["profile_image_url"] as? String
+            if let ownerAvatarURLString = ownerAvatarURLString {
+                ownerAvatarURL = NSURL(string: ownerAvatarURLString)
+            }
+        }
         retweetCount = (dictionary["retweet_count"] as? Int) ?? 0
-        favoriteCount = (dictionary["favorites_count"] as? Int) ?? 0
+        favoriteCount = (dictionary["favorite_count"] as? Int) ?? 0
         
         let dateString = dictionary["created_at"] as? String
         

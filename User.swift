@@ -9,13 +9,18 @@
 import UIKit
 
 class User: NSObject {
+    
 
     var name: String?
     var username: String?
     var profileURL: NSURL?
     var tagline: String?
     
+    var dictionary: NSDictionary?
+    
     init(dictionary: NSDictionary) {
+        self.dictionary = dictionary
+        
         name = dictionary["name"] as? String
         username = dictionary["screen_name"] as? String
         let profileURLString = dictionary["profile_image_url_https"] as? String
@@ -23,6 +28,38 @@ class User: NSObject {
             profileURL = NSURL(string: profileURLString)
         }
         tagline = dictionary["description"] as? String
+    }
+    
+    static let userDidLogOutNotification = "UserDidLogout"
+    static var _currentUser: User?
+    
+    class var currentUser: User? {
+        set(user) {
+            _currentUser = user
+            let defaults = NSUserDefaults.standardUserDefaults()
+        
+            if let user = user {
+                let data = try! NSJSONSerialization.dataWithJSONObject(user.dictionary!, options: [])
+                defaults.setObject(data, forKey: "currectUserData")
+            }
+            else {
+                defaults.setObject(nil, forKey: "currectUserData")
+            }
+        
+            defaults.synchronize()
+        }
+        get {
+            if(_currentUser == nil) {
+                let defaults = NSUserDefaults.standardUserDefaults()
+                let data = defaults.objectForKey("currectUserData") as? NSData
+                
+                if let data = data {
+                    let dictionary = try! NSJSONSerialization.JSONObjectWithData(data, options: []) as! NSDictionary
+                    _currentUser = User(dictionary: dictionary)
+                }
+            }
+            return _currentUser
+        }
     }
     
 }
