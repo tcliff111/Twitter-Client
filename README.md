@@ -26,8 +26,8 @@ The following **additional** features are implemented:
 
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
 
-1. 
-2. 
+1. I would like to discuss oAuth 1.0 a little more.
+2. I would also like to discuss the concept of closures a little more.
 
 ## Video Walkthrough 
 
@@ -40,6 +40,8 @@ GIF created with [LiceCap](http://www.cockos.com/licecap/).
 ## Notes
 
 Describe any challenges encountered while building the app.
+
+I ran into a really weird error with my table view.  I eventually fixed the problem by deleting a UILabel and replacing it.  Also, oAuth was relatively challenging to learn.
 
 ## License
 
