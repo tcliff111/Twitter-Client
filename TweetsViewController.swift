@@ -91,8 +91,10 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         
         let tweet = tweets[(indexPath?.row)!]
 
-        TwitterClient.sharedInstance.retweet(tweet)
-        self.tableView.reloadData()
+        TwitterClient.sharedInstance.retweet(tweet) { () -> () in
+            self.tableView.reloadData()
+        }
+        
     }
     
     func favoriteDetected(sender: UITapGestureRecognizer) {
@@ -105,8 +107,10 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         
         let tweet = tweets[(indexPath?.row)!]
         
-        TwitterClient.sharedInstance.favorite(tweet)
-        self.tableView.reloadData()
+        TwitterClient.sharedInstance.favorite(tweet) { () -> () in
+            self.tableView.reloadData()
+        }
+        
     }
     
     @IBAction func onLogout(sender: AnyObject) {

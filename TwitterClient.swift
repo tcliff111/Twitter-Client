@@ -82,24 +82,27 @@ class TwitterClient: BDBOAuth1SessionManager {
         NSNotificationCenter.defaultCenter().postNotificationName(User.userDidLogOutNotification, object: nil)
     }
     
-    func retweet(tweet: Tweet) {
+    func retweet(tweet: Tweet, success: ()->()) {
         let id = tweet.id
         POST("1.1/statuses/retweet/\(id).json", parameters: nil, progress: nil, success: { (task: NSURLSessionDataTask, response: AnyObject?) -> Void in
             print("retweeted")
             tweet.retweetCount++
+            success()
             }) { (task: NSURLSessionDataTask?, error: NSError) -> Void in
                 print("Error: \(error.localizedDescription)")
         }
     }
     
-    func favorite(tweet: Tweet) {
+    func favorite(tweet: Tweet, success: ()->()) {
         let id = tweet.id
         POST("/1.1/favorites/create.json?id=\(id)", parameters: nil, progress: nil, success: { (task: NSURLSessionDataTask, response: AnyObject?) -> Void in
             print("favorited")
             tweet.favoriteCount++
+            success()
             }) { (task: NSURLSessionDataTask?, error: NSError) -> Void in
                 print("Error: \(error.localizedDescription)")
         }
+        
 
     }
     

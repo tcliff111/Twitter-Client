@@ -58,11 +58,11 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TweetTableViewCell" rowHeight="86" id="mJR-ML-Obt" customClass="TweetTableViewCell" customModule="Twitter_Client" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="TweetTableViewCell" rowHeight="86" id="mJR-ML-Obt" customClass="TweetTableViewCell" customModule="Twitter_Client" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="92" width="320" height="86"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mJR-ML-Obt" id="b5m-kW-jox">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="85.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="287" height="85.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@twitter This is a tweet." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WW5-gE-Fa2">
@@ -166,6 +166,7 @@
                                             <outlet property="retweetImage" destination="YCy-dR-OzS" id="V8p-2Y-IqP"/>
                                             <outlet property="timeAgo" destination="31S-zE-cSh" id="fw8-tD-Ls7"/>
                                             <outlet property="tweetText" destination="WW5-gE-Fa2" id="wVE-wk-qMP"/>
+                                            <segue destination="3gk-S0-3xo" kind="push" id="DZw-1n-wRX"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -187,6 +188,49 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KfT-tT-oG3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="768" y="-27"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="3hc-3S-dMt">
+            <objects>
+                <viewController id="3gk-S0-3xo" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="2L0-lO-omk"/>
+                        <viewControllerLayoutGuide type="bottom" id="7Qx-aI-SW0"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="JY8-Mb-YgQ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kdp-AR-4xG">
+                                <rect key="frame" x="0.0" y="64" width="320" height="150"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4pS-Zx-FgX">
+                                <rect key="frame" x="120" y="108" width="80" height="79"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="203 Tweets" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Mc-CR-cQJ">
+                                <rect key="frame" x="38" y="214" width="98" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="JhL-Xf-zv7">
+                                <rect key="frame" x="0.0" y="243" width="320" height="325"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="45 Followers" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EHu-fD-hM3">
+                                <rect key="frame" x="189" y="214" width="98" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="UZl-yd-2li"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kdd-ek-lS1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1172" y="-21"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="sGw-e5-lyc">
