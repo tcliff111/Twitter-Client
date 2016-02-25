@@ -31,6 +31,10 @@ Please list two areas of the assignment you'd like to **discuss further with you
 
 ## Video Walkthrough 
 
+This demonstrates the retweeting and favoriting capabilities:
+
+<a href="http://imgur.com/1iAzzAU"><img src="http://i.imgur.com/1iAzzAU.gif" title="source: imgur.com" /></a>
+
 Here's a walkthrough of implemented user stories:
 
 <a href="http://imgur.com/VQ4YtHX"><img src="http://i.imgur.com/VQ4YtHX.gif" title="source: imgur.com" /></a>
