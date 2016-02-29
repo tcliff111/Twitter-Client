@@ -102,8 +102,17 @@ class TwitterClient: BDBOAuth1SessionManager {
             }) { (task: NSURLSessionDataTask?, error: NSError) -> Void in
                 print("Error: \(error.localizedDescription)")
         }
-        
-
+    }
+    
+    func  tweet(text: String, sender: UIViewController, success: ()->()) {
+        let params = ["status": text]
+        POST("/1.1/statuses/update.json", parameters: params, progress: nil, success: { (task: NSURLSessionDataTask, response: AnyObject?) -> Void in
+            print("tweeted")
+            
+            success()
+            }) { (task: NSURLSessionDataTask?, error: NSError) -> Void in
+                print("Error: \(error.localizedDescription)")
+        }
     }
     
 }

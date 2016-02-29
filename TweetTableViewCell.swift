@@ -19,7 +19,7 @@ class TweetTableViewCell: UITableViewCell {
     @IBOutlet weak var retweetImage: UIImageView!
     @IBOutlet weak var retweetCount: UILabel!
     @IBOutlet weak var favoriteCount: UILabel!
-    
+    @IBOutlet weak var replyImage: UIImageView!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -31,5 +31,6 @@ class TweetTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    
 
 }

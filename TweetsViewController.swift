@@ -12,6 +12,7 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     
     @IBOutlet weak var tableView: UITableView!
     var tweets = [Tweet]()
+    var replyOwner: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,6 +47,7 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("TweetTableViewCell", forIndexPath: indexPath) as! TweetTableViewCell
+        cell.selectionStyle = .None
         let tweet = self.tweets[indexPath.row]
         cell.tweetText.text = tweet.tweetText
         cell.ownerName.text = tweet.ownerName
@@ -77,6 +79,11 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         favoriteTap.numberOfTapsRequired = 1
         cell.favoriteImage.userInteractionEnabled = true
         cell.favoriteImage.addGestureRecognizer(favoriteTap)
+        
+        let replyTap = UITapGestureRecognizer(target: self, action:"replyDetected:")
+        replyTap.numberOfTapsRequired = 1
+        cell.replyImage.userInteractionEnabled = true
+        cell.replyImage.addGestureRecognizer(replyTap)
 
         return cell
     }
@@ -110,11 +117,46 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         TwitterClient.sharedInstance.favorite(tweet) { () -> () in
             self.tableView.reloadData()
         }
+    }
+    
+    func replyDetected(sender: UITapGestureRecognizer) {
+        let point = sender.view
+        let mainCell = point?.superview
+        let main = mainCell?.superview
+        let cell: TweetTableViewCell = main as! TweetTableViewCell
+        let indexPath = tableView.indexPathForCell(cell)
         
+        let tweet = tweets[(indexPath?.row)!]
+        replyOwner = tweet.ownerUsername!
+        performSegueWithIdentifier("reply", sender: self)
     }
     
     @IBAction func onLogout(sender: AnyObject) {
         TwitterClient.sharedInstance.logout()
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if segue.identifier == "DetailsViewControllerSegue" {
+            let sender2 = sender as! TweetTableViewCell
+            let indexPath = tableView.indexPathForCell(sender2)
+            if let destination = segue.destinationViewController as? DetailsViewController {
+                let tweet = self.tweets[indexPath!.row]
+                destination.tweet = tweet
+            }
+        }
+        if segue.identifier == "reply" {
+            if let replyOwner = replyOwner {
+                if let destination = segue.destinationViewController as? ComposeViewController {
+                    destination.initialText = "\(replyOwner) "
+                }
+            }
+        }
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tableView.reloadData()
     }
 
     /*
