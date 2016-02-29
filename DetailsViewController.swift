@@ -13,6 +13,7 @@ class DetailsViewController: UIViewController {
     var indexPath: NSIndexPath?
     var id: Int = 0
     var tweet: Tweet?
+    var replyOwner: String?
     
     @IBOutlet weak var ownerAvatar: UIImageView!
     @IBOutlet weak var ownerName: UILabel!
@@ -22,6 +23,7 @@ class DetailsViewController: UIViewController {
     @IBOutlet weak var favoriteCount: UILabel!
     @IBOutlet weak var favoriteIcon: UIImageView!
     @IBOutlet weak var retweetIcon: UIImageView!
+    @IBOutlet weak var replyIcon: UIImageView!
 
     
     override func viewDidLoad() {
@@ -46,6 +48,11 @@ class DetailsViewController: UIViewController {
         favoriteIcon.userInteractionEnabled = true
         favoriteIcon.addGestureRecognizer(favoriteTap)
         
+        let replyTap = UITapGestureRecognizer(target: self, action:"replyDetected:")
+        replyTap.numberOfTapsRequired = 1
+        replyIcon.userInteractionEnabled = true
+        replyIcon.addGestureRecognizer(replyTap)
+        
         // Do any additional setup after loading the view.
     }
 
@@ -66,6 +73,20 @@ class DetailsViewController: UIViewController {
         }
     }
     
+    func replyDetected(sender: UITapGestureRecognizer) {
+        replyOwner = tweet?.ownerUsername
+        performSegueWithIdentifier("reply2", sender: self)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "reply2" {
+            if let replyOwner = replyOwner {
+                if let destination = segue.destinationViewController as? ComposeViewController {
+                    destination.initialText = "\(replyOwner) "
+                }
+            }
+        }
+    }
 
     /*
     // MARK: - Navigation

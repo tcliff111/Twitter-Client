@@ -380,9 +380,11 @@
                         <outlet property="ownerAvatar" destination="zTW-RM-rF6" id="Zyx-A6-600"/>
                         <outlet property="ownerName" destination="Zoa-3P-1AU" id="Put-MR-J0G"/>
                         <outlet property="ownerUsername" destination="oNQ-bc-tbM" id="oh5-OQ-rmy"/>
+                        <outlet property="replyIcon" destination="Xld-8Y-6TY" id="8oK-cl-oBa"/>
                         <outlet property="retweetCount" destination="58Y-qD-y29" id="YYn-jK-bMe"/>
                         <outlet property="retweetIcon" destination="VDT-nK-Y6P" id="nJh-Qq-P7S"/>
                         <outlet property="tweetText" destination="aEc-GO-iOh" id="3Ve-Cu-SIJ"/>
+                        <segue destination="NHI-LW-8zo" kind="modal" identifier="reply2" id="omv-Je-2AM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kdd-ek-lS1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -563,6 +565,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="lri-nm-Gts"/>
-        <segue reference="uba-7N-VPZ"/>
+        <segue reference="omv-Je-2AM"/>
     </inferredMetricsTieBreakers>
 </document>
