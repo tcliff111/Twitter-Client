@@ -17,12 +17,12 @@ class Tweet: NSObject {
     var timestamp: NSDate?
     var retweetCount: Int = 0
     var favoriteCount: Int = 0
+    var user_id: String?
     var id: Int = 0
     
     init(dictionary: NSDictionary) {
         tweetText = dictionary["text"] as? String
         id = (dictionary["id"] as? Int) ?? 0
-        
         let user = dictionary["user"] as? NSDictionary
         if let user = user {
             ownerName = user["name"] as? String
@@ -31,6 +31,7 @@ class Tweet: NSObject {
             if let ownerAvatarURLString = ownerAvatarURLString {
                 ownerAvatarURL = NSURL(string: ownerAvatarURLString)
             }
+            user_id = user["id_str"] as? String
         }
         retweetCount = (dictionary["retweet_count"] as? Int) ?? 0
         favoriteCount = (dictionary["favorite_count"] as? Int) ?? 0

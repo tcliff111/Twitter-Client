@@ -31,8 +31,12 @@ class DetailsViewController: UIViewController {
         
         if let tweet = tweet {
             tweetText.text = tweet.tweetText
-            retweetCount.text = String(tweet.retweetCount)
-            favoriteCount.text = String(tweet.favoriteCount)
+            
+            let numberFormatter = NSNumberFormatter()
+            numberFormatter.numberStyle = NSNumberFormatterStyle.DecimalStyle
+            
+            retweetCount.text = numberFormatter.stringFromNumber(tweet.retweetCount)
+            favoriteCount.text = numberFormatter.stringFromNumber(tweet.favoriteCount)
             ownerName.text = tweet.ownerName
             ownerUsername.text = tweet.ownerUsername
             ownerAvatar.setImageWithURL(tweet.ownerAvatarURL!)

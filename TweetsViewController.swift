@@ -13,6 +13,7 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
     @IBOutlet weak var tableView: UITableView!
     var tweets = [Tweet]()
     var replyOwner: String?
+    var sentUser: User?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,7 +58,7 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
             cell.ownerAvatar.setImageWithURL(imageURL)
         }
 
-        var numberFormatter = NSNumberFormatter()
+        let numberFormatter = NSNumberFormatter()
         numberFormatter.numberStyle = NSNumberFormatterStyle.DecimalStyle
         
         cell.retweetCount.text = numberFormatter.stringFromNumber(tweet.retweetCount)
@@ -84,6 +85,11 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         replyTap.numberOfTapsRequired = 1
         cell.replyImage.userInteractionEnabled = true
         cell.replyImage.addGestureRecognizer(replyTap)
+        
+        let avatarTap = UITapGestureRecognizer(target: self, action:"avatarDetected:")
+        avatarTap.numberOfTapsRequired = 1
+        cell.ownerAvatar.userInteractionEnabled = true
+        cell.ownerAvatar.addGestureRecognizer(avatarTap)
 
         return cell
     }
@@ -131,6 +137,24 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
         performSegueWithIdentifier("reply", sender: self)
     }
     
+    func avatarDetected(sender: UITapGestureRecognizer) {
+        let point = sender.view
+        let mainCell = point?.superview
+        let main = mainCell?.superview
+        let cell: TweetTableViewCell = main as! TweetTableViewCell
+        let indexPath = tableView.indexPathForCell(cell)
+        
+        let tweet = tweets[(indexPath?.row)!]
+        TwitterClient.sharedInstance.getUser(tweet.user_id!) { (user) -> () in
+            self.sentUser = user
+            self.goToProfile()
+        }
+    }
+    
+    func goToProfile() {
+        performSegueWithIdentifier("userInfo", sender: self)
+    }
+    
     @IBAction func onLogout(sender: AnyObject) {
         TwitterClient.sharedInstance.logout()
     }
@@ -149,6 +173,13 @@ class TweetsViewController: UIViewController, UITableViewDataSource, UITableView
             if let replyOwner = replyOwner {
                 if let destination = segue.destinationViewController as? ComposeViewController {
                     destination.initialText = "\(replyOwner) "
+                }
+            }
+        }
+        if segue.identifier == "userInfo" {
+            if let sentUser = sentUser {
+                if let destination = segue.destinationViewController as? ProfileViewController {
+                    destination.user = sentUser
                 }
             }
         }

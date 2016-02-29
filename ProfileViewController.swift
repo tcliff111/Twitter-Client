@@ -59,6 +59,24 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         return cell
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if let avatarURL = user!.profileURL {
+            ownerAvatar.setImageWithURL(avatarURL)
+        }
+        ownerName.text = user!.name
+        ownerUsername.text = "@\(user!.username!)"
+        
+        
+        let numberFormatter = NSNumberFormatter()
+        numberFormatter.numberStyle = NSNumberFormatterStyle.DecimalStyle
+        
+        followerNumber.text = "\(numberFormatter.stringFromNumber(user!.followerNumber)!) Followers"
+        followingNumber.text = "\(numberFormatter.stringFromNumber(user!.followingNumber)!) Following"
+        tweetNumber.text = "\(numberFormatter.stringFromNumber(user!.tweetsNumber)!) Tweets"
+    }
+    
 //    func dequeueReusableHeaderFooterViewWithIdentifier(identifier: String) -> UITableViewHeaderFooterView? {
 //        return
 //    }

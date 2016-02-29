@@ -115,4 +115,14 @@ class TwitterClient: BDBOAuth1SessionManager {
         }
     }
     
+    func getUser(id: String, success: (user: User?)->()) {
+        GET("1.1/users/lookup.json?user_id=\(id)", parameters: nil, progress: nil, success: { (task: NSURLSessionDataTask, response: AnyObject?) -> Void in
+            let array = response as! NSArray
+            let dictionary = response![0] as! NSDictionary
+            let user = User(dictionary: dictionary)
+            success(user: user)
+            }, failure: { (task: NSURLSessionDataTask?, error: NSError) -> Void in
+                print("Error: \(error.localizedDescription)")
+        })
+    }
 }
