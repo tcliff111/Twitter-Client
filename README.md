@@ -12,7 +12,7 @@ The following **required** functionality is completed:
 - [x] Profile page:
    - [x] Contains the user header view
    - [x] Contains a section with the users basic stats: # tweets, # following, # followers
-- [ ] Home Timeline: Tapping on a user image should bring up that user's profile page
+- [x] Home Timeline: Tapping on a user image should bring up that user's profile page
 - [x] Compose Page: User can compose a new tweet by tapping on a compose button.
 
 The following **optional** features are implemented:
@@ -42,7 +42,7 @@ Please list two areas of the assignment you'd like to **discuss further with you
 
 Here's a walkthrough of implemented user stories:
 
-<a href="http://imgur.com/VQ4YtHX"><img src="http://i.imgur.com/VQ4YtHX.gif" title="source: imgur.com" /></a>
+<a href="http://imgur.com/UiEW6vW"><img src="http://i.imgur.com/UiEW6vW.gif" title="source: imgur.com" /></a>
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
